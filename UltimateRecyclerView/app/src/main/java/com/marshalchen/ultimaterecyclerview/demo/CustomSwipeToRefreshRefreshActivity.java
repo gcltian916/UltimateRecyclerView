@@ -158,7 +158,25 @@ public class CustomSwipeToRefreshRefreshActivity extends AppCompatActivity imple
                 }
             }
         });
+        ultimateRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            LinearLayoutManager manager = (LinearLayoutManager) ultimateRecyclerView.getLayoutManager();
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstpos =manager.findFirstCompletelyVisibleItemPosition();
+                if(firstpos >0){
+                    ultimateRecyclerView.mPtrFrameLayout.setEnabled(false);
+                }else{
+                    ultimateRecyclerView.mPtrFrameLayout.setEnabled(true);
+                }
+
+            }
+        });
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> spinnerAdapter =
